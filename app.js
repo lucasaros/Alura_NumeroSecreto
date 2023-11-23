@@ -7,8 +7,9 @@ let botaoChute = document.querySelectorAll('.container__botao')[0];
 function exibirTextoNaTela(tag, texto) { 
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
-    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate:1.1});
+    // responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate:1.1});
 }
+
 
 // função para exibir as mensagens iniciais
 function exibirMensagemInicial() {
@@ -56,12 +57,13 @@ function verificarChute() {
 
     let chute = document.querySelector('input').value; // obtendo o valor do elemento input do chute
     let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
-    let mensagemTentativas = `Parabens, você descobriu o número secreto ${numeroSecreto} com ${tentativas} ${palavraTentativa}`;
+    let mensagemTentativas = `Parabéns, você descobriu o número secreto ${numeroSecreto} com ${tentativas} ${palavraTentativa}`;
 
     if (chute == numeroSecreto) {
         exibirTextoNaTela('h1', 'Acertou');
         exibirTextoNaTela('.texto__paragrafo', mensagemTentativas);
-        // removendo o atributo "disabled" do botão "novo jogo"
+        // adicionando e removendo o atributo "disabled" dos botões"
+        document.querySelectorAll('.container__botao')[0].setAttribute('disabled',true);
         document.querySelectorAll('.container__botao')[1].removeAttribute('disabled');
     } else {
         if (chute > numeroSecreto) {
@@ -83,6 +85,7 @@ function reiniciarJogo() {
     tentativas = 1;
     // definir o atributo 'disabled' desse elemento como true
     document.querySelectorAll('.container__botao')[1].setAttribute('disabled',true);
+    document.querySelectorAll('.container__botao')[0].removeAttribute('disabled');
 }
 
 
